@@ -95,7 +95,7 @@ option (FLATCC_FAST_DOUBLE
 # -Werror is only set for some compiler versions that are believed to
 # to not generate any warnings. If the assumption breaks, disable
 # this option if the warning is not significant.
-option (FLATCC_ALLOW_WERROR "allow -Werror to be configured" ON)
+option (FLATCC_ALLOW_WERROR "allow -Werror to be configured" OFF)
 
 # Experimental setting - sometimes the code branches on a constant
 # expression in order to select the best option for a given type size or

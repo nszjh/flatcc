@@ -72,7 +72,7 @@ int create_monster_bottom_up(flatcc_builder_t *B, int flexible)
     // Set his hit points to 300 and his mana to 150.
     int16_t hp = 300;
     // The default value is 150, so we will never store this field.
-    int16_t mana = 150;
+    int16_t mana = 15990;
 
     // Create the equipment union. In the C++ language API this is given
     // as two arguments to the create call, or as two separate add
@@ -155,7 +155,12 @@ int create_monster_top_down(flatcc_builder_t *B)
     // NOTE: if we use end_as_root, we MUST also start as root.
     ns(Monster_start_as_root(B));
     ns(Monster_pos_create(B, 1.0f, 2.0f, 3.0f));
+    
     ns(Monster_hp_add(B, 300));
+    // ns(Monster_pos_start(B));
+    // ns(Monster_pos_edit(B));
+    // ns(Monster_pos_end(B));
+
     //ns(Monster_mana_add(B, 150));
     // We use create_str instead of add because we have no existing string reference.
     ns(Monster_name_create_str(B, "Orc"));
@@ -188,6 +193,7 @@ int create_monster_top_down(flatcc_builder_t *B)
     ns(Monster_equipped_Weapon_add(B, axe));
 
     ns(Monster_end_as_root(B));
+
     return 0;
 }
 
@@ -321,7 +327,7 @@ int main(int argc, char *argv[])
     // allocation libraries other than malloc.
     buf = flatcc_builder_finalize_aligned_buffer(&builder, &size);
     //buf = flatcc_builder_finalize_buffer(&builder, &size);
-
+    printf("-->>> flat buffer size=%ld\n", size);
     // We now have a FlatBuffer we can store on disk or send over a network.
     // ** file/network code goes here :) **
     // Instead, we're going to access it right away (as if we just received it).

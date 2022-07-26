@@ -1,0 +1,78 @@
+// Example IDL file for our monster's schema.
+
+namespace Nv.ns08;
+
+enum TofSensor:byte { NV08 = 0, NV09, NV10, NV11 }
+enum RgbSensor:byte { IMX327 = 0}
+
+//union Equipment { Weapon } // Optionally add more tables.
+
+//comm cfg
+struct HI_DEV_COMM_CFG{
+  u8CommId:uint8;
+	u32BaudRate:uint32;
+}
+
+
+//rtsp cfg
+struct HI_DEV_RTSP_CFG
+{
+   u32Size:uint32;
+   u8Enable:uint8;
+   u16SvrPort:uint16; //rtsp port   445
+}
+
+
+
+struct HI_DEV_CFG
+{
+    u32Size:uint32;
+    u8SerialId:[char:16];  	      //dev Id
+    u8DiNum:uint8;						  //alarm input number
+    u8DoNum:uint8;						  //alarm output number
+    u8ChnNum:uint8;					    //dev number
+    u8Rs232Num:uint8;					  //uart 232
+    u8Rs485Num:uint8;					  //uart 485
+    u8NetCardNum:uint8;					// netcard
+    u16DevType:uint16;					// dev type
+    u32HwVer:uint32;						  // hard version
+    u32CoreVer:uint32;					  // kernel version
+    u32SoftVer:uint32;					  // soft version
+    tof_sensor_type:TofSensor; 
+    rgb_sensor_type:RgbSensor; 
+    szMinVer:[char:16];           //child version
+    u32ChipType:uint32;
+}
+
+
+//factory param
+struct HI_PARAM_STABLE_INFO
+{
+    u32Size:uint32;
+    struDevCfg:HI_DEV_CFG;
+    u8MacAddr:[char:12];
+    u32IPAddr:[uint:2];
+    u32NetMask:[uint:2];
+    u32GateWay:[uint:2];
+    u8RestoreDefault:uint8;	// restore factory param
+}
+
+
+
+
+
+struct NvSysParam {
+  stable:HI_PARAM_STABLE_INFO; 
+  comm:HI_DEV_COMM_CFG; 
+  rtsp:HI_DEV_RTSP_CFG; 
+
+//  mana:short = 150;
+//  hp:short = 100;
+//  name:string;
+//  inventory:[ubyte];  // Vector of scalars.
+//  color:Color = Blue; // Enum.
+//  weapons:[Weapon];   // Vector of tables.
+//  equipped:Equipment; // Union.
+}
+
+root_type NvSysParam;

@@ -3,3 +3,4 @@ bin/*
 lib/*
 release/*
 scripts/build.cfg
+tmp/
